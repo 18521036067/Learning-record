@@ -96,7 +96,7 @@ $ git commit --amend
 
 `git branch -a`查看所有分支包括远程分支
 
-## 2.1本地分支操作
+### 2.1本地分支操作
 
 1.git branch xxx
 
@@ -119,7 +119,7 @@ git checkout xxx
 
 > 以上均为本地分支操作，新建分支后要将分支推送(需要权限)，删除分支后也是本地删除
 
-## 2.2远程分支操作
+### 2.2远程分支操作
 
 clone远程仓库时，若不带参数默认clone所有远程分支，但本地只会创建一个默认的master分支跟踪远程origin/master分支。因此在clone后直接使用master就可以pull。
 
@@ -147,12 +147,40 @@ clone远程仓库时，若不带参数默认clone所有远程分支，但本地�
 
 删除远程分支(参考上一条，可以把它理解为：如果省略`[本地分支]`，那就等于是在说“在这里提取空白然后把它变成`[远程分支]`”。)
 
-## 2.3变基
+### 2.3变基
 
 > 注意：**一旦分支中的提交对象发布到公共仓库，就千万不要对该分支进行变基操作。**
 > 
 > 既只能在本地分支变基操作并最终将变基结果推送到远程仓库，推送之后不可以对已推送commit进行任何变基操作
 
 把一个分支中的修改整合到另一个分支的办法有两种：`merge`和`rebase`
+
+## 3.版本回滚
+
+此处为简单梳理。详细内容参考官方文档[重置揭秘](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E7%BD%AE%E6%8F%AD%E5%AF%86)章节，叙述非常形象具体。
+
+1.git reset HEAD~
+
+`HEAD^`==`HEAD~`,`HEAD^^`==`HEAD~2`
+
+此系列命令共有三个模式选项
+
+`git reset --soft HEAD~`
+
+`git reset --mixed HEAD~`      缺省参数则默认--mixed
+
+`git reset --hard HEAD~`        有数据丢失危险
+
+
+
+> `--soft`仅HEAD指针回退到父结点，不改变Index区(staged)和工作区(modified)的内容，重新`commit`后回到原HEAD版本；
+> 
+> `--mixed`HEAD指针回退到父结点，并随后相应回退Index区内容(staged)，不改变工作区(modified)的内容，重新`add`后回到原HEAD版本；
+> 
+> `--soft`HEAD指针回退到父结点，随后相应回退Index区(staged)和工作区(modified)的内容，丢失全部内容，不可撤销，回不到HEAD版本；
+> 
+> 假设当前版本无已修改和已暂存文件。执行`--soft`后，当前版本(HEAD)回滚到上个版本，但是索引和工作区的内容依然存在，既HEAD和HEAD~版本之间做的修改都变为暂存，需要重新commit以从HEAD~版本fast forward到HEAD版本；
+> 
+> 若要继续回退，可以使用`git reset filename`或者`git reset .`取消某个文件或所有文件暂存，此时的状态相当于执行了`--mixed`；再使用`git checkout filename`或者`git checkout .`取消某个文件的修改(危险，会丢失内容)，此时相当于`--hard`。
 
 
