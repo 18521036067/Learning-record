@@ -182,5 +182,3 @@ clone远程仓库时，若不带参数默认clone所有远程分支，但本地�
 > 假设当前版本无已修改和已暂存文件。执行`--soft`后，当前版本(HEAD)回滚到上个版本，但是索引和工作区的内容依然存在，既HEAD和HEAD~版本之间做的修改都变为暂存，需要重新commit以从HEAD~版本fast forward到HEAD版本；
 > 
 > 若要继续回退，可以使用`git reset filename`或者`git reset .`取消某个文件或所有文件暂存，此时的状态相当于执行了`--mixed`；再使用`git checkout filename`或者`git checkout .`取消某个文件的修改(危险，会丢失内容)，此时相当于`--hard`。
-
-
