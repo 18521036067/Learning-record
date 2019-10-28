@@ -131,7 +131,7 @@ clone远程仓库时，若不带参数默认clone所有远程分支，但本地�
 
 创建并切换分支来跟踪远程分支，其原理和本地的`git checkout -b xxx`类似
 
-另外，新版本支持`git checkout --track origin/newbranch`自动创建无远程仓库名的同名分支来跟踪远程分支(无origin/前缀)
+另外，新版本支持`git checkout --track origin/newbranch`自动创建无远程仓库名的同名分支来跟踪远程分支(无origin/前缀，但不会自动跟踪远程分支)
 
 3.git push/pull 远程仓库名 本地分支 远程分支
 
