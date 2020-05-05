@@ -203,7 +203,7 @@ include_directories(
 add_executable(main main.cpp ./src/HelloWorld.cpp)
 ```
 
-### 3.3 CMakelists.txt模板
+### 3.3 CMakeLists.txt模板
 
 ```makefile
 # DC's Simple Template
